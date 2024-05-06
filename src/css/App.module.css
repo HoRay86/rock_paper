@@ -1,0 +1,150 @@
+.homepageCtn {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  height: 100vh; /* 设置高度为视口高度，以填充整个屏幕 */
+}
+
+.homepage {
+  text-align: center; /* 内容水平居中 */
+}
+
+.container {
+  container: 800px;
+  padding: 40px 0;
+}
+
+.headerCtn {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding: 20px 0;
+}
+.titleCtn {
+  background-color: rgb(227, 25, 59);
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: start;
+}
+.titleCtn h3 {
+  color: rgb(233, 213, 174);
+}
+
+.scoreCtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scoreCtn h3 {
+  margin: 0;
+  padding: 10px;
+  background-color: #181818;
+  color: #fff;
+}
+.scoreCtn p {
+  margin: 0;
+  padding: 10px;
+}
+
+.score {
+  width: 200px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.results {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  height: 200px;
+  font-size: 30px;
+}
+
+.playerHand,
+.computerHand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.resultsWinner {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 50px;
+  padding: 0;
+}
+
+.choiceBtnCtn {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.choiceBtn {
+  width: 70px;
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  border-radius: 5px;
+  border: #fff;
+  align-items: center;
+}
+
+.playBtn {
+  background-color: bisque;
+  border-radius: 5px;
+  padding: 10px 30px;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.bounce {
+  transition: all 0.2s ease-in-out;
+}
+
+.bounce:hover {
+  transform: translateY(-15px);
+}
+
+.activeChoice {
+  background-color: rgb(240, 174, 8);
+}
+
+.timer {
+  color: #181818;
+  font-size: 100px;
+}
+
+.playerShake {
+  animation: playerShakeAnimaation 0.8s ease-in-out infinite;
+}
+
+@keyframes playerShakeAnimaation {
+  0%,
+  100% {
+    transform: rotate(100deg);
+  }
+  50% {
+    transform: rotate(80deg);
+  }
+}
+.computerShake {
+  animation: computerShakeAnimaation 0.8s ease-in-out infinite;
+}
+
+@keyframes computerShakeAnimaation {
+  0%,
+  100% {
+    transform: scaleY(-1) rotate(-80deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(-100deg);
+  }
+}
