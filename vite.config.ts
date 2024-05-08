@@ -5,4 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/rock_paper/",
   plugins: [react()],
+  build: {
+    outDir: 'dist',
+  },
 });
