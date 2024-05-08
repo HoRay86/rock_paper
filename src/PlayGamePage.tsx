@@ -17,6 +17,8 @@ import {
   FaRegHandRock,
   FaRegHandScissors,
 } from "react-icons/fa";
+import ChoiceButton from "./components/ChoiceButton";
+import IconWithName from "./components/IconWithName";
 
 interface paramsProps {
   roomId: string;
@@ -32,10 +34,10 @@ interface GameRoomData {
 const PlayGamePage = () => {
   const navigate = useNavigate();
   const db = getFirestore();
-  const { roomId, player } = useParams<paramsProps>(); 
+  const { roomId, player } = useParams<paramsProps>();
 
-  const myRolePlayer = `player${player}`
-  const myOpponentPlayer =player === "1" ? "player2" : "player1"
+  const myRolePlayer = `player${player}`;
+  const myOpponentPlayer = player === "1" ? "player2" : "player1";
 
   const [myChoice, setMyChoice] = useState<string | null>(null);
   const [myOpponentChoice, setMyOpponentChoice] = useState<string | null>(null);
@@ -56,20 +58,11 @@ const PlayGamePage = () => {
   });
 
   const options = [
-    {
-      name: "rock",
-
-      icon: <FaRegHandRock size={70} />,
-    },
-    {
-      name: "paper",
-      icon: <FaRegHandPaper size={70} />,
-    },
-    {
-      name: "scissors",
-      icon: <FaRegHandScissors size={70} />,
-    },
+    { name: 'rock', icon: <FaRegHandRock size={30} /> },
+  { name: 'paper', icon: <FaRegHandPaper size={30} /> },
+  { name: 'scissors', icon: <FaRegHandScissors size={30} /> }
   ];
+
   useEffect(() => {
     resetSelection();
   }, []);
@@ -83,9 +76,7 @@ const PlayGamePage = () => {
 
     const unsubscribe = onSnapshot(gameRoomRef, (docSnapshot) => {
       if (docSnapshot.exists()) {
-        console.log("data,", docSnapshot.data());
-        const { playersChoice } =
-          docSnapshot.data() as GameRoomData;
+        const { playersChoice } = docSnapshot.data() as GameRoomData;
 
         setMyChoice(
           myRolePlayer === "player1"
@@ -102,7 +93,6 @@ const PlayGamePage = () => {
         setDisabled(false);
       } else {
         console.log("Game room does not exist");
-        // 处理游戏房间不存在的情况
       }
     });
     return () => unsubscribe();
@@ -111,14 +101,12 @@ const PlayGamePage = () => {
   //點選選項後存firebase
   const selectionOption = async (selectedOption: string) => {
     setResults({ winner: "", message: "" });
-    // setMyRole({ ...myRole, choice: selectedOption });
     setMyChoice(selectedOption);
 
     if (!roomId) return; // 如果沒有 roomId，不執行更新操作
 
     const gameRoomRef = doc(db, "gameRooms", roomId);
     const playerKey = myRolePlayer === "player1" ? "player1" : "player2";
-    // const opponentKey = myOpponent.player === "player1" ? "player1" : "player2";
     const roomSnapshot = await getDoc(gameRoomRef);
     if (roomSnapshot.exists()) {
       const roomData = roomSnapshot.data();
@@ -154,19 +142,13 @@ const PlayGamePage = () => {
       if (!data) {
         return;
       }
-      console.log(
-        "opponentChoice - after selected",
-        data.playersChoice[opponentKey]
-      );
-      console.log("myChoice - after selected", data.playersChoice[playerKey]);
+      
       if (data.playersChoice[opponentKey] !== null) {
-        
         // 如果opponent.choice有東西可以直接做比對
         setMyOpponentChoice(data.playersChoice[opponentKey]);
-  
+
         setLoading(false);
         if (data.playersChoice[playerKey] !== null) {
-          console.log("start from check");
           start();
         }
       }
@@ -196,7 +178,6 @@ const PlayGamePage = () => {
       setMyOpponentChoice(null);
     }
 
-    console.log("disable", disabled);
   };
 
   const navigateToHome = () => {
@@ -215,15 +196,11 @@ const PlayGamePage = () => {
     }
   }, [timer, runTimer]);
 
-
   const start = () => {
     setResults({ winner: "", message: "" });
-    console.log("start function");
-    console.log("myChoice", myChoice);
-    console.log("run timer function");
-
     setRunTimer(true);
   };
+  
   const play = () => {
     if (myChoice === myOpponentChoice) {
       setResults({ winner: "No one", message: " we have a draw" });
@@ -246,11 +223,10 @@ const PlayGamePage = () => {
       setResults({ winner: "Opponent", message: " You lose" });
       setScore({ ...score, opponent: score.opponent + 1 });
     }
-    console.log("opponent---", score.opponent);
-    console.log("player---", score.player);
   };
-
-  return (
+  const mySelectedOption = options.find(option => option.name === myChoice);
+  const opponentSelectedOption = options.find(option => option.name === myOpponentChoice);
+ return (
     <div className="App">
       <h1>12</h1>
       <h3>Room ID : {roomId}</h3>
@@ -266,15 +242,22 @@ const PlayGamePage = () => {
         </div>
 
         <div className={styles.scoreCtn}>
-          <ScoreCard playerRole="YOU"  />
+          <ScoreCard playerRole="YOU" />
           <ScoreCard playerRole="OPPONENT" />
         </div>
         <div className={styles.results}>
           <div className={styles.playerHand}>
             {runTimer && (
-              <div className={styles.playerShake}>{options[0].icon}</div>
+              <div className={styles.playerShake}> <FaRegHandRock size={50}/> </div>
             )}
-            {myChoice  && !runTimer  &&  (<p>{myChoice}</p>)}
+            {myChoice && !runTimer &&(
+                
+              <IconWithName
+               name={myChoice}
+               icon={ mySelectedOption.icon}
+               iconSize={40}
+              />
+                )}
           </div>
 
           <div className={styles.mid}>
@@ -291,49 +274,35 @@ const PlayGamePage = () => {
           <div className={styles.computerHand}>
             {myChoice !== null && myOpponentChoice === null && (
               <>
-                <ClipLoader color={"#111"} loading={loading} size={30} />
+                <ClipLoader color={"#111"} loading={loading} size={40} />
               </>
             )}
             {runTimer && (
-              <div className={styles.opponentShake}>{options[0].icon}</div>
+              <div className={styles.opponentShake}>{ <FaRegHandRock size={50} />}</div>
             )}
-            {results?.winner && (
-              <>
-                <p> {myOpponentChoice}</p>
-              </>
+            {results?.winner && myOpponentChoice &&(
+              
+              <IconWithName
+               name={myOpponentChoice}
+               icon={opponentSelectedOption.icon}
+               iconSize={40}
+              />
             )}
           </div>
         </div>
         {!disabled && myChoice === null && (
           <>
             <div className={styles.choiceBtnCtn}>
-              <button
-                className={`${styles.choiceBtn} ${styles.bounce} ${
-                  myChoice === "rock" ? styles.activeChoice : ""
-                }`}
-                onClick={() => selectionOption("rock")}
-              >
-                <FaRegHandRock size={30} />
-                Rock
-              </button>
-              <button
-                className={`${styles.choiceBtn} ${styles.bounce} ${
-                  myChoice === "paper" ? styles.activeChoice : ""
-                }`}
-                onClick={() => selectionOption("paper")}
-              >
-                <FaRegHandPaper size={30} />
-                Paper
-              </button>
-              <button
-                className={`${styles.choiceBtn} ${styles.bounce} ${
-                  myChoice === "scissors" ? styles.activeChoice : ""
-                }`}
-                onClick={() => selectionOption("scissors")}
-              >
-                <FaRegHandScissors size={30} />
-                Scissors
-              </button>
+              {options.map((option) => (
+                <ChoiceButton
+                  key={option.name}
+                  name={option.name}
+                  icon={option.icon}
+                  iconSize={40}
+                  onClick={selectionOption}
+                  isActive={myChoice === option.name}
+                />
+              ))}
             </div>
           </>
         )}

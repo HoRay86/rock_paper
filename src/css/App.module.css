@@ -87,7 +87,7 @@
   gap: 50px;
 }
 
-.choiceBtn {
+/* .choiceBtn {
   width: 70px;
   display: flex;
   padding: 5px;
@@ -95,7 +95,7 @@
   border-radius: 5px;
   border: #fff;
   align-items: center;
-}
+} */
 
 .playBtn {
   background-color: bisque;
@@ -104,7 +104,7 @@
   margin-top: 30px;
   font-weight: bold;
 }
-
+/* 
 .bounce {
   transition: all 0.2s ease-in-out;
 }
@@ -115,7 +115,7 @@
 
 .activeChoice {
   background-color: rgb(240, 174, 8);
-}
+} */
 
 .timer {
   color: #181818;
