@@ -6,12 +6,11 @@ import GamePage from "./GamePage";
 
 function App() {
   return (
-
     <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/game/:playerType" element={<GamePage />} />
-        </Routes>
+      <Routes>
+        <Route path="/rock_paper/" element={<Home />} />
+        <Route path="/rock_paper/game/:playerType" element={<GamePage />} />
+      </Routes>
     </Router>
   );
 }

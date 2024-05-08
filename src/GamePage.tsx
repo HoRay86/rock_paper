@@ -13,7 +13,7 @@ const GamePage = () => {
   const navigate = useNavigate();
   const { playerType } = useParams();
   const navigateToHome = () => {
-    navigate("/");
+    navigate("/rock_paper/");
   };
   const [playerHand, setPlayerHand] = useState(0);
   const [computerHand, setComputerrHand] = useState(0);
@@ -23,11 +23,10 @@ const GamePage = () => {
     winner: "",
     message: "",
   });
-const [score, setScore] = useState({
-    player:0,
-    computer:0
-})
-
+  const [score, setScore] = useState({
+    player: 0,
+    computer: 0,
+  });
 
   useEffect(() => {
     if (runTimer && timer > 0) {
@@ -57,7 +56,7 @@ const [score, setScore] = useState({
   ];
 
   const selectionOption = (handIndex: number) => {
-    setResults({winner: "", message: ""})
+    setResults({ winner: "", message: "" });
     setPlayerHand(handIndex);
   };
   const generateComputerHand = () => {
@@ -66,7 +65,7 @@ const [score, setScore] = useState({
   };
 
   const start = () => {
-    setResults({winner: "", message: ""})
+    setResults({ winner: "", message: "" });
     setRunTimer(true);
     generateComputerHand();
   };
@@ -78,37 +77,37 @@ const [score, setScore] = useState({
       options[computerHand].name === "paper"
     ) {
       setResults({ winner: "Computer", message: " You lose" });
-      setScore({...score, computer: score.computer+1})
+      setScore({ ...score, computer: score.computer + 1 });
     } else if (
       options[playerHand].name === "rock" &&
       options[computerHand].name === "scissors"
     ) {
       setResults({ winner: "You", message: " You win !!!" });
-      setScore({...score, player: score.player+1})
+      setScore({ ...score, player: score.player + 1 });
     } else if (
       options[playerHand].name === "paper" &&
       options[computerHand].name === "rock"
     ) {
       setResults({ winner: "You", message: " You win" });
-      setScore({...score, player: score.player+1})
+      setScore({ ...score, player: score.player + 1 });
     } else if (
       options[playerHand].name === "paper" &&
       options[computerHand].name === "scissors"
     ) {
       setResults({ winner: "Computer", message: " You lose" });
-      setScore({...score, computer: score.computer+1})
+      setScore({ ...score, computer: score.computer + 1 });
     } else if (
       options[playerHand].name === "scissors" &&
       options[computerHand].name === "paper"
     ) {
       setResults({ winner: "You", message: " You win" });
-      setScore({...score, player: score.player+1})
+      setScore({ ...score, player: score.player + 1 });
     } else if (
       options[playerHand].name === "scissors" &&
       options[computerHand].name === "rock"
     ) {
       setResults({ winner: "Computer", message: " You lose" });
-      setScore({...score, computer: score.computer+1})
+      setScore({ ...score, computer: score.computer + 1 });
     }
   };
 
@@ -136,7 +135,7 @@ const [score, setScore] = useState({
       </div>
       <div className={styles.results}>
         <div className={styles.playerHand}>
-        {runTimer && (
+          {runTimer && (
             <div className={styles.playerShake}>{options[0].icon}</div>
           )}
           {results?.winner && (
@@ -151,7 +150,10 @@ const [score, setScore] = useState({
           {runTimer && <p className={styles.timer}> {timer}</p>}
           {results?.winner && (
             <>
-              <p> <b> WINNER :</b>  {results.winner}</p>
+              <p>
+                {" "}
+                <b> WINNER :</b> {results.winner}
+              </p>
               <p> {results.message}</p>
             </>
           )}
