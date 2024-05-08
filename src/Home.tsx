@@ -26,7 +26,7 @@ const Home = () => {
     player?: number,
     roomId?: string
   ) => {
-    let url = `/game/${opponentType}`;
+    let url = `/rock_paper/game/${opponentType}`;
 
     if (player !== undefined && roomId !== undefined) {
       // 如果有 player 和 roomId，加到 URL
@@ -56,14 +56,6 @@ const Home = () => {
           playersChoice: updatedPlayersChoice,
         });
 
-        // await updateDoc(roomRef, {
-        //   players: 2,
-        //   playersChoice: {
-        //     // 保留现有的 player1，同时设置 player2 为 null
-        //     player1: null,
-        //     player2: null,
-        //   },
-        // }, { merge: true });
 
         navigateToGamePage("friend", 2, theRoomId);
       } else {

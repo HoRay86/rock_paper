@@ -17,7 +17,7 @@ const GamePage = () => {
   const roomId = queryParams.get("roomId");
 
   const navigateToHome = () => {
-    navigate("/");
+    navigate("/rock_paper/");
   };
   const [playerHand, setPlayerHand] = useState(0);
   const [computerHand, setComputerrHand] = useState(0);
