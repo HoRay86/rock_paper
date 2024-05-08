@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./Home";
 import GamePage from "./GamePage";
-import GamePage2 from "./GamePage2";
+// import GamePage2 from "./GamePage2";
+import PlayGamePage from "./PlayGamePage";
 
 function App() {
   return (
@@ -11,8 +12,7 @@ function App() {
     <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/game/:roomId" element={<GamePage2 />} />
-          {/* <Route path="/game/computer" element={<GamePage />} /> */}
+          <Route path="/game/:opponentType/:player/:roomId" element={<PlayGamePage />} />
           <Route path="/game/:opponentType" element={<GamePage />} />
         </Routes>
     </Router>

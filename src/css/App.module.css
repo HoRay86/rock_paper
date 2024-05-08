@@ -135,11 +135,11 @@
     transform: rotate(80deg);
   }
 }
-.computerShake {
-  animation: computerShakeAnimaation 0.8s ease-in-out infinite;
+.opponentShake {
+  animation: opponentShakeAnimaation 0.8s ease-in-out infinite;
 }
 
-@keyframes computerShakeAnimaation {
+@keyframes opponentShakeAnimaation {
   0%,
   100% {
     transform: scaleY(-1) rotate(-80deg);

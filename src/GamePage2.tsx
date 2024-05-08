@@ -1,7 +1,12 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { ClipLoader, ClockLoader } from "react-spinners";
 import "./firebase/firebaseConfig";
-import { getFirestore, doc, updateDoc, onSnapshot } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  onSnapshot,
+} from "firebase/firestore";
 
 import styles from "./css/App.module.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,6 +16,7 @@ import {
   FaRegHandRock,
   FaRegHandScissors,
 } from "react-icons/fa";
+
 
 const GamePage2 = () => {
   const navigate = useNavigate();
@@ -87,16 +93,17 @@ const GamePage2 = () => {
 
     const playUnsubscribe = onSnapshot(gameRoomRef, (snapshot) => {
       const data = snapshot.data();
-      console.log("data", data);
+      console.log('data', data)
       setRunTimer(true);
       if (data) {
         setPlayer1Choice(data.player1Choice);
         setPlayer2Choice(data.player2Choice);
       }
 
-      playUnsubscribe();
+        playUnsubscribe();
     });
   };
+
 
   const start = () => {
     setResults({ winner: "", message: "" });
@@ -107,22 +114,40 @@ const GamePage2 = () => {
   const play = () => {
     if (player1Choice === player2Choice) {
       setResults({ winner: "No one", message: " we have a draw" });
-    } else if (player1Choice === "rock" && player2Choice === "paper") {
+    } else if (
+      player1Choice === "rock" &&
+      player2Choice === "paper"
+    ) {
       setResults({ winner: "Computer", message: " You lose" });
       setScore({ ...score, computer: score.computer + 1 });
-    } else if (player1Choice === "rock" && player2Choice === "scissors") {
+    } else if (
+      player1Choice === "rock" &&
+      player2Choice === "scissors"
+    ) {
       setResults({ winner: "You", message: " You win !!!" });
       setScore({ ...score, player: score.player + 1 });
-    } else if (player1Choice === "paper" && player2Choice === "rock") {
+    } else if (
+      player1Choice === "paper" &&
+      player2Choice === "rock"
+    ) {
       setResults({ winner: "You", message: " You win" });
       setScore({ ...score, player: score.player + 1 });
-    } else if (player1Choice === "paper" && player2Choice === "scissors") {
+    } else if (
+      player1Choice === "paper" &&
+      player2Choice === "scissors"
+    ) {
       setResults({ winner: "Computer", message: " You lose" });
       setScore({ ...score, computer: score.computer + 1 });
-    } else if (player1Choice === "scissors" && player2Choice === "paper") {
+    } else if (
+      player1Choice === "scissors" &&
+      player2Choice === "paper"
+    ) {
       setResults({ winner: "You", message: " You win" });
       setScore({ ...score, player: score.player + 1 });
-    } else if (player1Choice === "scissors" && player2Choice === "rock") {
+    } else if (
+      player1Choice === "scissors" &&
+      player2Choice === "rock"
+    ) {
       setResults({ winner: "Computer", message: " You lose" });
       setScore({ ...score, computer: score.computer + 1 });
     }
@@ -138,10 +163,8 @@ const GamePage2 = () => {
     borderColor: "red",
   };
 
-  const selectedOption = options.find(
-    (option) => option.name === player1Choice
-  );
-  const player2Option = options.find((option) => option.name === player2Choice);
+  const selectedOption = options.find(option => option.name === player1Choice);
+  const player2Option = options.find(option => option.name === player2Choice);
 
   return (
     <div className="App">
@@ -168,10 +191,10 @@ const GamePage2 = () => {
         </div>
         <div className={styles.results}>
           <div className={styles.playerHand}>
-            {runTimer && (
+              {runTimer && (
               <div className={styles.playerShake}>{options[0].icon}</div>
             )}
-            {results?.winner && selectedOption && (
+            {results?.winner && selectedOption &&(
               <>
                 {selectedOption.icon}
                 <p>{player1Choice}</p>
@@ -194,17 +217,18 @@ const GamePage2 = () => {
           <div className={styles.computerHand}>
             {player1Choice && player2Choice === undefined && (
               <>
-                <ClipLoader
-                  color={"#111"}
-                  loading={player2Choice === undefined}
-                  size={30}
-                />
+              <ClipLoader
+
+                color={"#111"}
+                loading={player2Choice === undefined }
+                size={30}
+              />
               </>
             )}
             {runTimer && (
               <div className={styles.computerShake}>{options[0].icon}</div>
             )}
-            {results?.winner && player2Option && (
+            {results?.winner &&  player2Option &&(
               <>
                 {player2Option.icon}
                 <p>{player2Choice}</p>
@@ -227,27 +251,27 @@ const GamePage2 = () => {
             <div className={styles.choiceBtnCtn}>
               <button
                 className={`${styles.choiceBtn} ${styles.bounce} ${
-                  player1Choice === "rock" ? styles.activeChoice : ""
+                  player1Choice === 'rock' ? styles.activeChoice : ""
                 }`}
-                onClick={() => selectionOption(`${roomId}`, "rock")}
+                onClick={() => selectionOption(`${roomId}`, 'rock')}
               >
                 <FaRegHandRock size={30} />
                 Rock
               </button>
               <button
                 className={`${styles.choiceBtn} ${styles.bounce} ${
-                  player1Choice === "paper" ? styles.activeChoice : ""
+                  player1Choice === 'paper' ? styles.activeChoice : ""
                 }`}
-                onClick={() => selectionOption(`${roomId}`, "paper")}
+                onClick={() => selectionOption(`${roomId}`, 'paper')}
               >
                 <FaRegHandPaper size={30} />
                 Paper
               </button>
               <button
                 className={`${styles.choiceBtn} ${styles.bounce} ${
-                  player1Choice === "scissors" ? styles.activeChoice : ""
+                  player1Choice === 'scissors' ? styles.activeChoice : ""
                 }`}
-                onClick={() => selectionOption(`${roomId}`, "scissors")}
+                onClick={() => selectionOption(`${roomId}`, 'scissors')}
               >
                 <FaRegHandScissors size={30} />
                 Scissors

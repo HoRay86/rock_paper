@@ -166,7 +166,7 @@ const GamePage = () => {
         <div className={styles.computerHand}>
           {/* {results.winner ==='' && ( */}
           {runTimer && (
-            <div className={styles.computerShake}>{options[0].icon}</div>
+            <div className={styles.opponentShake}>{options[0].icon}</div>
           )}
           {results?.winner && (
             <>

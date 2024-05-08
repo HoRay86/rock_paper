@@ -43,7 +43,28 @@ const Home = () => {
 
       if (roomSnapshot.exists()) {
         // 存在，導頁 + 將遊戲人數改為2
-        await updateDoc(roomRef, { players: 2, player2Choice: null });
+
+        const roomData = roomSnapshot.data();
+
+        const updatedPlayersChoice = {
+          ...roomData.playersChoice,
+          player2: null,
+        };
+
+        await updateDoc(roomRef, {
+          players: 2,
+          playersChoice: updatedPlayersChoice,
+        });
+
+        // await updateDoc(roomRef, {
+        //   players: 2,
+        //   playersChoice: {
+        //     // 保留现有的 player1，同时设置 player2 为 null
+        //     player1: null,
+        //     player2: null,
+        //   },
+        // }, { merge: true });
+
         navigateToGamePage("friend", 2, theRoomId);
       } else {
         alert("Room ID not found. Please enter a valid Room ID.");
@@ -87,7 +108,6 @@ const Home = () => {
     if (!roomId) {
       return;
     }
-    console.log("123");
     setLoading(true);
 
     const gameRoomRef = doc(db, "gameRooms", roomId);
