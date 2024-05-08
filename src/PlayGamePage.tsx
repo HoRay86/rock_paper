@@ -177,7 +177,7 @@ const PlayGamePage = () => {
   };
 
   const navigateToHome = () => {
-    navigate("/");
+    navigate("/rock_paper/");
   };
 
   useEffect(() => {
