@@ -20,10 +20,6 @@ import {
 import ChoiceButton from "./components/ChoiceButton";
 import IconWithName from "./components/IconWithName";
 
-interface paramsProps {
-  roomId: string;
-  player: string;
-}
 
 interface GameRoomData {
   players: number;
@@ -34,7 +30,7 @@ interface GameRoomData {
 const PlayGamePage = () => {
   const navigate = useNavigate();
   const db = getFirestore();
-  const { roomId, player } = useParams<paramsProps>();
+  const { roomId, player } = useParams();
 
   const myRolePlayer = `player${player}`;
   const myOpponentPlayer = player === "1" ? "player2" : "player1";
@@ -250,7 +246,7 @@ const PlayGamePage = () => {
             {runTimer && (
               <div className={styles.playerShake}> <FaRegHandRock size={50}/> </div>
             )}
-            {myChoice && !runTimer &&(
+            {myChoice && !runTimer && mySelectedOption &&(
                 
               <IconWithName
                name={myChoice}
@@ -280,7 +276,7 @@ const PlayGamePage = () => {
             {runTimer && (
               <div className={styles.opponentShake}>{ <FaRegHandRock size={50} />}</div>
             )}
-            {results?.winner && myOpponentChoice &&(
+            {results?.winner && myOpponentChoice && opponentSelectedOption &&(
               
               <IconWithName
                name={myOpponentChoice}
