@@ -223,8 +223,7 @@ const PlayGamePage = () => {
   const mySelectedOption = options.find(option => option.name === myChoice);
   const opponentSelectedOption = options.find(option => option.name === myOpponentChoice);
  return (
-    <div className="App">
-      <h1>12</h1>
+    <div  className={styles.gamePageCtn}>
       <h3>Room ID : {roomId}</h3>
 
       <div className={styles.container}>

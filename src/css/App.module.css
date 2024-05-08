@@ -1,12 +1,16 @@
 .homepageCtn {
   display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
-  height: 100vh; /* 设置高度为视口高度，以填充整个屏幕 */
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh;
 }
 
 .homepage {
-  text-align: center; /* 内容水平居中 */
+  text-align: center; 
+}
+
+.gamePageCtn {
+  margin: 50px;
 }
 
 .container {
